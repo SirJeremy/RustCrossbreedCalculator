@@ -1,0 +1,131 @@
+﻿<Window x:Class="RustCrossbreed.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Crossbreed Calculator" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize">
+
+    <Window.Content>
+        <Grid Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="268"/>
+                <ColumnDefinition Width="12"/>
+                <!--for spacing-->
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <!--Submit-->
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="2"/>
+                <!--for spacing-->
+
+                <!--Breeds-->
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="5"/>
+                <!--for spacing-->
+
+                <!--Crossbreding-->
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="5"/>
+                <!--for spacing-->
+
+                <!--Output-->
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <!--Submit-->
+            <TextBox Grid.Row="0" Grid.Column="0" 
+                     x:Name="GeneInput" Text="{Binding GeneInput}"/>
+            <Button Grid.Row="0" Grid.Column="2"
+                    x:Name="GeneSubmit" Content="Submit" Click="GeneSubmit_Click"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Foreground="Red" FontSize="14"
+                       x:Name="GeneInputFeedback" Text="{Binding GeneInputErrorFeedback}"/>
+
+            <!--Breeds-->
+            <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3"
+                       x:Name="BreedsHeader" Content="Breeds"/>
+            <ListView Grid.Row="4" Grid.Column="0" Grid.RowSpan="5" Height="215"
+                      x:Name="GenesList" ItemsSource="{Binding BreedsList}" 
+                      SelectionMode="Extended" SelectionChanged="GenesList_SelectionChanged"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                      ScrollViewer.VerticalScrollBarVisibility="Visible"
+                      ScrollViewer.CanContentScroll="True">
+                <ListView.View>
+                    <!--change to data grid to prevent resizing-->
+                    <GridView AllowsColumnReorder="False">
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=GenesString}" Header="Genes" Width="205"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Generation}" Header="Gen" Width="40"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Button Grid.Row="4" Grid.Column="2"
+                    x:Name="DeleteBreed" Content="Delete" Click="DeleteBreed_Click"/>
+            <Button Grid.Row="5" Grid.Column="2" Margin="0,10,0,0"
+                    x:Name="DeleteAllBreeds" Content="Delete All" Click="DeleteAllBreeds_Click"/>
+            <Button Grid.Row="6" Grid.Column="2" Margin="0,10,0,0"
+                    x:Name="History" Content="History" Click="History_Click"/>
+            <Button Grid.Row="7" Grid.Column="2" Margin="0,10,0,0"
+                    x:Name="MoreInformation" Content="More Info" Click="MoreInformation_Click"/>
+            <Button Grid.Row="8" Grid.Column="2" Margin="0,10,0,0"
+                    x:Name="AddBreed" Content="Add" Click="AddBreed_Click"/>
+
+            <!--Crossbreding-->
+            <Label Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="3"
+                       x:Name="CrossbreedingHeader" Content="Crossbreeding"/>
+            <ListView Grid.Row="11" Grid.Column="0" Grid.RowSpan="3" Height="125"
+                      x:Name="SelectedList" ItemsSource="{Binding SelectedList}" 
+                      SelectionMode="Extended" SelectionChanged="SelectedList_SelectionChanged"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                      ScrollViewer.VerticalScrollBarVisibility="Visible"
+                      ScrollViewer.CanContentScroll="True">
+                <ListView.View>
+                    <!--change to data grid to prevent resizing-->
+                    <GridView AllowsColumnReorder="False">
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=GenesString}" Header="Genes" Width="205"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Generation}" Header="Gen" Width="40"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Button Grid.Row="11" Grid.Column="2"
+                    x:Name="RemoveCrossbreeding" Content="Remove" Click="RemoveCrossbreeding_Click"/>
+            <Button Grid.Row="12" Grid.Column="2" Margin="0,10,0,0"
+                    x:Name="ClearCrossbreeding" Content="Clear" Click="ClearCrossbreeding_Click"/>
+            <Button Grid.Row="13" Grid.Column="2" Margin="0,10,0,0"
+                    x:Name="Crossbreed" Content="Crossbreed" Click="Crossbreed_Click"/>
+
+            <!--Output-->
+            <Label Grid.Row="15" Grid.Column="0" Grid.ColumnSpan="3"
+                       x:Name="OutputHeader" Content="Output"/>
+            <ListView Grid.Row="16" Grid.Column="0" Grid.RowSpan="2" Height="80"
+                      x:Name="OutputList" ItemsSource="{Binding OutputList}" 
+                      SelectionMode="Extended" SelectionChanged="OutputList_SelectionChanged"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                      ScrollViewer.VerticalScrollBarVisibility="Visible"
+                      ScrollViewer.CanContentScroll="True">
+                <ListView.View>
+                    <!--change to data grid to prevent resizing-->
+                    <GridView AllowsColumnReorder="False">
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=GenesString}" Header="Genes" Width="205"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Generation}" Header="Gen" Width="40"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Button Grid.Row="16" Grid.Column="2"
+                    x:Name="OutputSave" Content="Save Breed" Click="OutputSave_Click"/>
+            <Button Grid.Row="17" Grid.Column="2" Margin="0,10,0,0"
+                    x:Name="OutputClear" Content="Clear" Click="OutputClear_Click"/>
+        </Grid>
+    </Window.Content>
+</Window>
