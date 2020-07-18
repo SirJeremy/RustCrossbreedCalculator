@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using RustCrossbreed.BusinessLogic;
 using RustCrossbreed.Services;
 using RustCrossbreed.Factories;
-using System.Windows.Documents;
 
 namespace RustCrossbreed.ViewModels
 {
@@ -22,6 +22,10 @@ namespace RustCrossbreed.ViewModels
             BreedsRepo = breedsRepo ?? throw new ArgumentNullException(nameof(breedsRepo));
             SelectedRepo = selectedRepo ?? throw new ArgumentNullException(nameof(selectedRepo));
             OutputRepo = outputRepo ?? throw new ArgumentNullException(nameof(outputRepo));
+
+            BreedsListSelectedItems = new List<Breed>();
+            SelectedListSelectedItems = new List<Breed>();
+            OutputListSelectedItems = new List<Breed>();
         }
         #endregion
 
@@ -123,11 +127,19 @@ namespace RustCrossbreed.ViewModels
         }
         public void OpenHistoryWindow()
         {
-
         }
         public void OnMoreInfoClick()
         {
+            foreach (Breed breed in BreedsListSelectedItems)
+            {
+                var children = FindChildren(breed);
+                var parentGens = FindParentGenerations(breed);
+                var vm = new MoreInfoViewModel(breed, children, parentGens);
 
+                //creating a window here violates MVVM, but thats a problem for another day
+                var moreInforWindow = new Views.MoreInfoWindow(vm);
+                moreInforWindow.Show();
+            }
         }
         public void AddSelectedBreeds()
         {
@@ -170,6 +182,27 @@ namespace RustCrossbreed.ViewModels
                 if (BreedsRepo.Add(breed))
                     OutputRepo.Remove(breed);
             }
+        }
+
+
+        private int?[] FindParentGenerations(Breed breed)
+        {
+            int?[] parentGenenerations = new int?[breed.ParentGenes.Length];
+
+            for (int i = 0; i < breed.ParentGenes.Length; i++)
+            {
+                //if found, parent's generation is assigned, else null is assigned
+                parentGenenerations[i] = BreedsRepo.Get(breed.ParentGenes[i])?.Generation;
+            }
+
+            return parentGenenerations;
+        }
+
+        private (string genes, int generation)[] FindChildren(Breed breed)
+        {
+            return BreedsRepo.FindChildren(breed)
+                .Select(child => (child.GenesString, child.Generation))
+                .ToArray();
         }
         #endregion
     }
