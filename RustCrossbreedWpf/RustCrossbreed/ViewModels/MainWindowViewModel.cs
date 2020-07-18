@@ -132,8 +132,8 @@ namespace RustCrossbreed.ViewModels
         {
             foreach (Breed breed in BreedsListSelectedItems)
             {
-                var children = FindChildren(breed);
-                var parentGens = FindParentGenerations(breed);
+                Breed[] children = BreedsRepo.FindChildren(breed).ToArray();
+                int?[] parentGens = FindParentGenerations(breed);
                 var vm = new MoreInfoViewModel(breed, children, parentGens);
 
                 //creating a window here violates MVVM, but thats a problem for another day
@@ -196,13 +196,6 @@ namespace RustCrossbreed.ViewModels
             }
 
             return parentGenenerations;
-        }
-
-        private (string genes, int generation)[] FindChildren(Breed breed)
-        {
-            return BreedsRepo.FindChildren(breed)
-                .Select(child => (child.GenesString, child.Generation))
-                .ToArray();
         }
         #endregion
     }

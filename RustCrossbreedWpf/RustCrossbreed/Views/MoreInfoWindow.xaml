@@ -46,8 +46,8 @@
             <ListView.View>
                 <!--change to data grid to prevent resizing-->
                 <GridView AllowsColumnReorder="False">
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Item1}" Header="Genes" Width="240"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Item2}" Header="Gen" Width="78"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=GenesString}" Header="Genes" Width="240"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Generation}" Header="Gen" Width="78"/>
                 </GridView>
             </ListView.View>
         </ListView>
