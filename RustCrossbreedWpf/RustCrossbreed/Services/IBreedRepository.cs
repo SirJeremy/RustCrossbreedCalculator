@@ -17,6 +17,8 @@ namespace RustCrossbreed.Services
         public int GetIndex(string genes);
         public ObservableCollection<Breed> GetAll();
 
+        public List<Breed> FindChildren(Breed parentBreed);
+
         //true if successfully removed
         public bool Remove(Breed breed);
         public bool Remove(IEnumerable<EGene> genes);

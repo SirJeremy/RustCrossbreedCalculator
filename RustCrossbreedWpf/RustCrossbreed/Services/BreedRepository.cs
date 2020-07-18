@@ -169,6 +169,27 @@ namespace RustCrossbreed.Services
             return output;
         }
 
+        public List<Breed> FindChildren(Breed parentBreed)
+        {
+            var children = new List<Breed>();
+
+            //check each breed
+            foreach (Breed breed in Breeds)
+            {
+                //check parents of breed to find match
+                foreach (string parentGene in breed.ParentGenes)
+                {
+                    if (parentGene == parentBreed.GenesString)
+                    {
+                        children.Add(breed);
+                        break;
+                    }
+                }
+            }
+
+            return children;
+        }
+
         public bool Remove(Breed breed)
         {
             return Breeds.Remove(breed);
