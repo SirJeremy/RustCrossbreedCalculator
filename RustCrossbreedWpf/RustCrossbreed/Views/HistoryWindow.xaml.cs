@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using RustCrossbreed.Models;
 using RustCrossbreed.ViewModels;
 
 namespace RustCrossbreed.Views
@@ -22,22 +24,22 @@ namespace RustCrossbreed.Views
 
         private void History_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            vm.HistorySelected = History.SelectedItems.Cast<HistoryModel>().ToList();
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-
+            vm.DeleteSelected();
         }
 
         private void DeleteAll_Click(object sender, RoutedEventArgs e)
         {
-
+            vm.DeleteAll();
         }
 
         private void MoreInfo_Click(object sender, RoutedEventArgs e)
         {
-
+            vm.OnMoreInfoClick();
         }
     }
 }
