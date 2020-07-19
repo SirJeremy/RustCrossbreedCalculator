@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using RustCrossbreed.ViewModels;
 
 namespace RustCrossbreed.Views
 {
@@ -17,9 +10,14 @@ namespace RustCrossbreed.Views
     /// </summary>
     public partial class HistoryWindow : Window
     {
-        public HistoryWindow()
+        private readonly HistoryViewModel vm;
+
+        public HistoryWindow(HistoryViewModel viewModel)
         {
             InitializeComponent();
+
+            vm = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
+            this.DataContext = vm;
         }
 
         private void History_SelectionChanged(object sender, SelectionChangedEventArgs e)

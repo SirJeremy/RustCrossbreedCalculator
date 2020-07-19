@@ -135,6 +135,9 @@ namespace RustCrossbreed.ViewModels
         }
         public void OpenHistoryWindow()
         {
+            // creating a window here violates MVVM, but thats a problem for another day
+            var historyWindow = new Views.HistoryWindow(new HistoryViewModel(History));
+            historyWindow.Show();
         }
         public void OnMoreInfoClick()
         {
