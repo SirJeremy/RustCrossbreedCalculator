@@ -24,20 +24,25 @@ namespace RustCrossbreed.Services
         #endregion
 
         #region Constructors
-        public BreedRepository(bool allowDuplicates = false, IEnumerable<Breed> breed = null)
+        public BreedRepository(bool allowDuplicates = false)
         {
             AllowDuplicates = allowDuplicates;
-
-            if (breed == null)
-                Breeds = new ObservableCollection<Breed>();
-            else
-                Breeds = new ObservableCollection<Breed>(breed);
+            Breeds = new ObservableCollection<Breed>();
+        }
+        public BreedRepository(IEnumerable<Breed> breeds, bool allowDuplicates = false)
+        {
+            AllowDuplicates = allowDuplicates;
+            Breeds = new ObservableCollection<Breed>(breeds);
         }
         #endregion
 
         #region IBreedRepository
         //does not allow duplicate genes, even if generations and parents are different
-        public bool Add(Breed breed)
+        public void Add(Breed breed)
+        {
+            TryAdd(breed);
+        }
+        public bool TryAdd(Breed breed)
         {
             if (!AllowDuplicates && Contains(breed.ToString()))
                 return false;

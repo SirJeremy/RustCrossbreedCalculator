@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using RustCrossbreed.Models;
 using RustCrossbreed.BusinessLogic;
 using RustCrossbreed.Services;
 using RustCrossbreed.Factories;
@@ -16,12 +17,14 @@ namespace RustCrossbreed.ViewModels
         #endregion
 
         #region Constructors
-        public MainWindowViewModel(RustCrossbreeder crossbreeder, IBreedRepository breedsRepo, IBreedRepository selectedRepo, IBreedRepository outputRepo)
+        public MainWindowViewModel(RustCrossbreeder crossbreeder, IBreedRepository breedsRepo, IBreedRepository selectedRepo, 
+            IBreedRepository outputRepo, IRepository<HistoryModel> history)
         {
             Crossbreeder = crossbreeder ?? throw new ArgumentNullException(nameof(crossbreeder));
             BreedsRepo = breedsRepo ?? throw new ArgumentNullException(nameof(breedsRepo));
             SelectedRepo = selectedRepo ?? throw new ArgumentNullException(nameof(selectedRepo));
             OutputRepo = outputRepo ?? throw new ArgumentNullException(nameof(outputRepo));
+            History = history ?? throw new ArgumentNullException(nameof(history));
 
             BreedsListSelectedItems = new List<Breed>();
             SelectedListSelectedItems = new List<Breed>();
@@ -60,6 +63,7 @@ namespace RustCrossbreed.ViewModels
         private IBreedRepository BreedsRepo { get; }
         private IBreedRepository SelectedRepo { get; }
         private IBreedRepository OutputRepo { get; }
+        private IRepository<HistoryModel> History { get; }
 
         private RustCrossbreeder Crossbreeder { get; }
         #endregion
@@ -71,15 +75,13 @@ namespace RustCrossbreed.ViewModels
             {
                 if (BreedFactory.TryParseBreed(GeneInput, out Breed breed))
                 {
-                    if (BreedsRepo.Contains(breed.Genes))
+                    if (BreedsRepo.TryAdd(breed))
                     {
-                        GeneInputErrorFeedback = "Cannot add duplicate genes.";
+                        ClearGeneInput();
+                        History.Add(new HistoryModel(EHistoryAction.Added, breed));
                     }
                     else
-                    {
-                        BreedsList.Add(breed);
-                        ClearGeneInput();
-                    }
+                        GeneInputErrorFeedback = "Cannot add duplicate genes.";
                 }
                 else
                     GeneInputErrorFeedback = "Unable to read genes. Make sure you only enter valid genes.";
@@ -95,6 +97,11 @@ namespace RustCrossbreed.ViewModels
         }
         public void ClearGenes()
         {
+            foreach(Breed breed in BreedsList)
+            {
+                History.Add(new HistoryModel(EHistoryAction.Removed, breed));
+            }
+
             BreedsList.Clear();
             SelectedList.Clear();
             OutputList.Clear();
@@ -116,6 +123,7 @@ namespace RustCrossbreed.ViewModels
             {
                 if (BreedsRepo.Remove(breed))
                 {
+                    History.Add(new HistoryModel(EHistoryAction.Removed, breed));
                     while (SelectedRepo.Remove(breed)) //see RemoveSelectedBreeds() for more info
                     {
                         itemRemoved |= true;
@@ -127,6 +135,9 @@ namespace RustCrossbreed.ViewModels
         }
         public void OpenHistoryWindow()
         {
+            // creating a window here violates MVVM, but thats a problem for another day
+            var historyWindow = new Views.HistoryWindow(new HistoryViewModel(History, BreedsRepo));
+            historyWindow.Show();
         }
         public void OnMoreInfoClick()
         {
@@ -145,7 +156,7 @@ namespace RustCrossbreed.ViewModels
         {
             foreach (Breed breed in BreedsListSelectedItems)
             {
-                if (SelectedRepo.Add(breed))
+                if (SelectedRepo.TryAdd(breed))
                     ClearGenesOutput();
             }
         }
@@ -171,7 +182,7 @@ namespace RustCrossbreed.ViewModels
             {
                 OutputRepo.Clear();
                 Crossbreeder.Crossbreed(SelectedList)
-                    .ForEach(breed => OutputRepo.Add(breed));
+                    .ForEach(breed => OutputRepo.TryAdd(breed));
             }
         }
 
@@ -179,8 +190,11 @@ namespace RustCrossbreed.ViewModels
         {
             foreach (Breed breed in OutputListSelectedItems.ToArray())
             {
-                if (BreedsRepo.Add(breed))
+                if (BreedsRepo.TryAdd(breed))
+                {
+                    History.Add(new HistoryModel(EHistoryAction.Crossbred, breed));
                     OutputRepo.Remove(breed);
+                }
             }
         }
 
