@@ -37,7 +37,7 @@
                 <!--Output-->
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
             <!--Submit-->
@@ -101,7 +101,7 @@
             <!--Output-->
             <Label Grid.Row="14" Grid.Column="0" Grid.ColumnSpan="3"
                        x:Name="OutputHeader" Content="Output"/>
-            <ListView Grid.Row="15" Grid.Column="0" Grid.RowSpan="2" Height="80"
+            <ListView Grid.Row="15" Grid.Column="0" Grid.RowSpan="2" Height="125"
                       x:Name="OutputList" ItemsSource="{Binding OutputList}" 
                       SelectionMode="Extended" SelectionChanged="OutputList_SelectionChanged"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
