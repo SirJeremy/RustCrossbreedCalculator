@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -141,7 +141,20 @@ namespace RustCrossbreed.ViewModels
         }
         public void OnMoreInfoClick()
         {
-            foreach (Breed breed in BreedsListSelectedItems)
+            List<Breed> selection;
+
+            //find the currently selected
+            //only the most recently selected listview can have a selection, enforced in view, maybe enforce in viewmodel later
+            if (BreedsListSelectedItems.Count > 0)
+                selection = BreedsListSelectedItems;
+            else if (SelectedListSelectedItems.Count > 0)
+                selection = SelectedListSelectedItems;
+            else if (OutputListSelectedItems.Count > 0)
+                selection = OutputListSelectedItems;
+            else
+                return;
+
+            foreach (Breed breed in selection)
             {
                 Breed[] children = BreedsRepo.FindChildren(breed).ToArray();
                 int?[] parentGens = FindParentGenerations(breed);
