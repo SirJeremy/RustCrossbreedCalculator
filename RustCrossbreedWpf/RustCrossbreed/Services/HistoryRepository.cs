@@ -24,7 +24,8 @@ namespace RustCrossbreed.Services
         #region IRepository
         public void Add(HistoryModel item)
         {
-            History.Add(item);
+            //tmp fix until redo the controls for the lists, because listview cant do reverse order
+            History.Insert(0, item);
         }
 
         public void Clear()
