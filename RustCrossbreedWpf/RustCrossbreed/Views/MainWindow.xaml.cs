@@ -39,7 +39,7 @@ namespace RustCrossbreed.Views
         }
         private void DeleteAllBreeds_Click(object sender, RoutedEventArgs e)
         {
-            vm.ClearGenes();
+            vm.DeleteAllBreeds();
         }
         private void History_Click(object sender, RoutedEventArgs e)
         {
@@ -80,17 +80,41 @@ namespace RustCrossbreed.Views
         #region Selection Changed Handlers
         private void GenesList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            vm.BreedsListSelectedItems = GenesList.SelectedItems.Cast<Breed>().ToList();
+            var selectedItems = GenesList.SelectedItems.Cast<Breed>().ToList();
+
+            vm.BreedsListSelectedItems = selectedItems;
+            //only want 1 listview to have a selection
+            if (selectedItems.Count != 0)
+            {
+                SelectedList.UnselectAll();
+                OutputList.UnselectAll();
+            }
         }
 
         private void SelectedList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            vm.SelectedListSelectedItems = SelectedList.SelectedItems.Cast<Breed>().ToList();
+            var selectedItems = SelectedList.SelectedItems.Cast<Breed>().ToList();
+
+            vm.SelectedListSelectedItems = selectedItems;
+            //only want 1 listview to have a selection
+            if (selectedItems.Count != 0)
+            {
+                GenesList.UnselectAll();
+                OutputList.UnselectAll();
+            }
         }
 
         private void OutputList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            vm.OutputListSelectedItems = OutputList.SelectedItems.Cast<Breed>().ToList();
+            var selectedItems = OutputList.SelectedItems.Cast<Breed>().ToList();
+
+            vm.OutputListSelectedItems = selectedItems;
+            //only want 1 listview to have a selection
+            if (selectedItems.Count != 0)
+            {
+                GenesList.UnselectAll();
+                SelectedList.UnselectAll();
+            }
         }
         #endregion
     }
