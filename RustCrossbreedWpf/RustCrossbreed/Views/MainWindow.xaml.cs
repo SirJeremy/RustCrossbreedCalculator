@@ -18,10 +18,10 @@ namespace RustCrossbreed.Views
             InitializeComponent();
 
             var genesRepo = new BreedRepository();
-            genesRepo.Add(BreedFactory.ParseBreed("GYHXWW"));
-            genesRepo.Add(BreedFactory.ParseBreed("GGYYYY"));
-            genesRepo.Add(BreedFactory.ParseBreed("GGGGYY"));
-            genesRepo.Add(BreedFactory.ParseBreed("GGYYHH"));
+            genesRepo.TryAdd(BreedFactory.ParseBreed("GYHXWW"));
+            genesRepo.TryAdd(BreedFactory.ParseBreed("GGYYYY"));
+            genesRepo.TryAdd(BreedFactory.ParseBreed("GGGGYY"));
+            genesRepo.TryAdd(BreedFactory.ParseBreed("GGYYHH"));
 
             vm = new MainWindowViewModel(new RustCrossbreeder(), genesRepo, new BreedRepository(true), new BreedRepository());
             this.DataContext = vm;

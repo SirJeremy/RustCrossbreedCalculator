@@ -71,15 +71,10 @@ namespace RustCrossbreed.ViewModels
             {
                 if (BreedFactory.TryParseBreed(GeneInput, out Breed breed))
                 {
-                    if (BreedsRepo.Contains(breed.Genes))
-                    {
-                        GeneInputErrorFeedback = "Cannot add duplicate genes.";
-                    }
-                    else
-                    {
-                        BreedsList.Add(breed);
+                    if (BreedsRepo.TryAdd(breed))
                         ClearGeneInput();
-                    }
+                    else
+                        GeneInputErrorFeedback = "Cannot add duplicate genes.";
                 }
                 else
                     GeneInputErrorFeedback = "Unable to read genes. Make sure you only enter valid genes.";
@@ -145,7 +140,7 @@ namespace RustCrossbreed.ViewModels
         {
             foreach (Breed breed in BreedsListSelectedItems)
             {
-                if (SelectedRepo.Add(breed))
+                if (SelectedRepo.TryAdd(breed))
                     ClearGenesOutput();
             }
         }
@@ -171,7 +166,7 @@ namespace RustCrossbreed.ViewModels
             {
                 OutputRepo.Clear();
                 Crossbreeder.Crossbreed(SelectedList)
-                    .ForEach(breed => OutputRepo.Add(breed));
+                    .ForEach(breed => OutputRepo.TryAdd(breed));
             }
         }
 
@@ -179,7 +174,7 @@ namespace RustCrossbreed.ViewModels
         {
             foreach (Breed breed in OutputListSelectedItems.ToArray())
             {
-                if (BreedsRepo.Add(breed))
+                if (BreedsRepo.TryAdd(breed))
                     OutputRepo.Remove(breed);
             }
         }
