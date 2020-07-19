@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Linq;
 using RustCrossbreed.BusinessLogic;
 using RustCrossbreed.ViewModels;
@@ -39,7 +39,7 @@ namespace RustCrossbreed.Views
         }
         private void DeleteAllBreeds_Click(object sender, RoutedEventArgs e)
         {
-            vm.ClearGenes();
+            vm.DeleteAllBreeds();
         }
         private void History_Click(object sender, RoutedEventArgs e)
         {

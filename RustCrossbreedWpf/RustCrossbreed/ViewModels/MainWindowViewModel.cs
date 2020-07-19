@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -95,7 +95,7 @@ namespace RustCrossbreed.ViewModels
             GeneInput = string.Empty;
             GeneInputErrorFeedback = string.Empty;
         }
-        public void ClearGenes()
+        public void DeleteAllBreeds()
         {
             foreach(Breed breed in BreedsList)
             {
