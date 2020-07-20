@@ -1,0 +1,4 @@
+﻿I am 90% sure that the game uses Roboto Condensed to the font for genes.
+I also included the mono version because while the Condensed is more accurate,
+it will not format correctly unless I make a custom view for genes.
+Until then Mono will be used to represent genes.
