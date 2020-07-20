@@ -1,13 +1,15 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <FontFamily x:Key="NotoSansRegular">./Resources/Fonts/Noto_Sans-Regular.tts#Noto Sans</FontFamily>
-    <FontFamily x:Key="NotoSansItalic">./Resources/Fonts/Noto_Sans-Italic.tts#Noto Sans</FontFamily>
-    <FontFamily x:Key="NotoSansBold">./Resources/Fonts/Noto_Sans-Bold.tts#Noto Sans</FontFamily>
-    <FontFamily x:Key="NotoSansBoldItalic">./Resources/Fonts/Noto_Sans-BoldItalic.tts#Noto Sans</FontFamily>
+    <!--https://docs.microsoft.com/en-us/dotnet/framework/wpf/advanced/packaging-fonts-with-applications-->
+    <!--so I think the documentation for this is wrong, using "./" doesnt work but both "/" and "../" work-->
+    <!--using the following also works "pack://application:,,,/Resources/Fonts/Roboto_Mono/#Roboto Mono"-->
+    <FontFamily x:Key="NotoSans">../Resources/Fonts/Noto_Sans/#Noto Sans</FontFamily>
+    <FontFamily x:Key="RobotoMono">../Resources/Fonts/Roboto_Mono/#Roboto Mono</FontFamily>
+
 
     <Style TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="{StaticResource NotoSansRegular}"/>
+        <Setter Property="FontFamily" Value="{StaticResource NotoSans}"/>
     </Style>
 
     <!--this makes me miss css-->
