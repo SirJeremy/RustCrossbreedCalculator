@@ -3,7 +3,7 @@
 Program to calculate crossbreeds in Rust. This program will figure out the genes of a crossbreed for you and remember which breeds are its parents. You could have done this previously with a notepad, but this has streamlined the process.
 Currently only available for Windows.
 
-![Preview of program appearance](https://github.com/SirJeremy/RustCrossbreedCalculator/blob/master/preview.png?raw=true)
+![Preview of program appearance](https://raw.githubusercontent.com/SirJeremy/RustCrossbreedCalculator/dev/preview.png)
 
 *This program is still in development. It works but more features and improvements are planned.*
 
