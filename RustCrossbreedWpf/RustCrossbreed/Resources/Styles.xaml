@@ -1,14 +1,11 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <FontFamily x:Key="NotoSansRegular">./Resources/Fonts/Noto_Sans-Regular.tts#Noto Sans</FontFamily>
-    <FontFamily x:Key="NotoSansItalic">./Resources/Fonts/Noto_Sans-Italic.tts#Noto Sans</FontFamily>
-    <FontFamily x:Key="NotoSansBold">./Resources/Fonts/Noto_Sans-Bold.tts#Noto Sans</FontFamily>
-    <FontFamily x:Key="NotoSansBoldItalic">./Resources/Fonts/Noto_Sans-BoldItalic.tts#Noto Sans</FontFamily>
-
-    <Style TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="{StaticResource NotoSansRegular}"/>
-    </Style>
+    <!--https://docs.microsoft.com/en-us/dotnet/framework/wpf/advanced/packaging-fonts-with-applications-->
+    <!--so I think the documentation for this is wrong, using "./" doesnt work but both "/" and "../" work-->
+    <!--using the following also works "pack://application:,,,/Resources/Fonts/Roboto_Mono/#Roboto Mono"-->
+    <FontFamily x:Key="NotoSans">../Resources/Fonts/Noto_Sans/#Noto Sans</FontFamily>
+    <FontFamily x:Key="RobotoMono">../Resources/Fonts/Roboto_Mono/#Roboto Mono</FontFamily>
 
     <!--this makes me miss css-->
     <!--<Style TargetType="Label" x:Name="ErrorLabel">
@@ -17,17 +14,33 @@
         <Setter Property="Padding" Value="0"/>
         <Setter Property="Foreground" Value="Red"/>
     </Style>-->
+    
     <Style TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource NotoSans}"/>
+        <Setter Property="FontWeight" Value="Regular"/>
         <Setter Property="FontSize" Value="24"/>
-        <Setter Property="Foreground" Value="Black"/>
         <Setter Property="Padding" Value="0"/>
     </Style>
 
     <Style TargetType="Button">
         <Setter Property="Height" Value="35"/>
         <Setter Property="Width" Value="120"/>
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="FontStyle" Value="Normal"/>
+        <Setter Property="FontFamily" Value="{StaticResource NotoSans}"/>
         <Setter Property="FontWeight" Value="Regular"/>
+        <Setter Property="FontSize" Value="14"/>
+    </Style>
+
+    <Style TargetType="TextBox">
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="FontFamily" Value="{StaticResource RobotoMono}"/>
+        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="Padding" Value="5,0"/>
+    </Style>
+
+    <Style TargetType="ListView">
+        <Setter Property="FontFamily" Value="{StaticResource RobotoMono}"/>
+        <Setter Property="FontWeight" Value="Regular"/>
+        <Setter Property="FontSize" Value="12"/>
     </Style>
 </ResourceDictionary>

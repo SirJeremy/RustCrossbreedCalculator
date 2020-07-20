@@ -18,6 +18,9 @@
     <None Remove="Resources\Fonts\Noto_Sans\NotoSans-BoldItalic.ttf" />
     <None Remove="Resources\Fonts\Noto_Sans\NotoSans-Italic.ttf" />
     <None Remove="Resources\Fonts\Noto_Sans\NotoSans-Regular.ttf" />
+    <None Remove="Resources\Fonts\Roboto_Mono\LICENSE.txt" />
+    <None Remove="Resources\Fonts\Roboto_Mono\README.txt" />
+    <None Remove="Resources\Fonts\Roboto_Mono\RobotoMono-VariableFont_wght.ttf" />
     <None Include="..\..\LICENSE.txt">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
@@ -38,6 +41,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Fonts\Noto_Sans\NotoSans-Regular.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Fonts\Roboto_Mono\LICENSE.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Fonts\Roboto_Mono\README.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Fonts\Roboto_Mono\RobotoMono-VariableFont_wght.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

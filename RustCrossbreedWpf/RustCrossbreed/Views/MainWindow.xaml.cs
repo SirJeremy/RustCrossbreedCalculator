@@ -62,10 +62,6 @@ namespace RustCrossbreed.Views
         {
             vm.ClearSelectedGenes();
         }
-        private void Crossbreed_Click(object sender, RoutedEventArgs e)
-        {
-            vm.CrossbreedSelectedBreeds();
-        }
 
         private void OutputSave_Click(object sender, RoutedEventArgs e)
         {

@@ -170,7 +170,9 @@ namespace RustCrossbreed.ViewModels
             foreach (Breed breed in BreedsListSelectedItems)
             {
                 if (SelectedRepo.TryAdd(breed))
-                    ClearGenesOutput();
+                {
+                    CrossbreedSelectedBreeds();
+                }
             }
         }
 
@@ -186,8 +188,8 @@ namespace RustCrossbreed.ViewModels
                     itemRemoved |= true;
                 }
             }
-            if(itemRemoved)
-                ClearGenesOutput();
+            if (itemRemoved)
+                CrossbreedSelectedBreeds();
         }
         public void CrossbreedSelectedBreeds()
         {
