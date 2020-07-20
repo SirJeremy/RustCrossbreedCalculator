@@ -41,6 +41,6 @@
     <Style TargetType="ListView">
         <Setter Property="FontFamily" Value="{StaticResource RobotoMono}"/>
         <Setter Property="FontWeight" Value="Regular"/>
-        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontSize" Value="13"/>
     </Style>
 </ResourceDictionary>
