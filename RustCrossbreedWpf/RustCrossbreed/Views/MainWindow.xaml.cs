@@ -67,10 +67,6 @@ namespace RustCrossbreed.Views
         {
             vm.SaveOutputBreed();
         }
-        private void OutputClear_Click(object sender, RoutedEventArgs e)
-        {
-            vm.ClearGenesOutput();
-        }
         #endregion 
 
         #region Selection Changed Handlers
