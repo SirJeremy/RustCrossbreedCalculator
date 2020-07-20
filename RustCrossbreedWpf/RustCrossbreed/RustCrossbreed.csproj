@@ -13,6 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="LICENSE.txt" />
     <None Remove="Resources\Fonts\Noto_Sans\LICENSE.txt" />
     <None Remove="Resources\Fonts\Noto_Sans\NotoSans-Bold.ttf" />
     <None Remove="Resources\Fonts\Noto_Sans\NotoSans-BoldItalic.ttf" />
@@ -21,13 +22,16 @@
     <None Remove="Resources\Fonts\Roboto_Mono\LICENSE.txt" />
     <None Remove="Resources\Fonts\Roboto_Mono\README.txt" />
     <None Remove="Resources\Fonts\Roboto_Mono\RobotoMono-VariableFont_wght.ttf" />
-    <None Include="..\..\LICENSE.txt">
+    <None Include="..\LICENSE.txt">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="LICENSE.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Fonts\Noto_Sans\LICENSE.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
