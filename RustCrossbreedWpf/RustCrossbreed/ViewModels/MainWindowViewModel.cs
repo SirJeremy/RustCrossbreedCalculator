@@ -95,7 +95,7 @@ namespace RustCrossbreed.ViewModels
             GeneInput = string.Empty;
             GeneInputErrorFeedback = string.Empty;
         }
-        public void ClearGenes()
+        public void DeleteAllBreeds()
         {
             foreach(Breed breed in BreedsList)
             {
@@ -141,7 +141,20 @@ namespace RustCrossbreed.ViewModels
         }
         public void OnMoreInfoClick()
         {
-            foreach (Breed breed in BreedsListSelectedItems)
+            List<Breed> selection;
+
+            //find the currently selected
+            //only the most recently selected listview can have a selection, enforced in view, maybe enforce in viewmodel later
+            if (BreedsListSelectedItems.Count > 0)
+                selection = BreedsListSelectedItems;
+            else if (SelectedListSelectedItems.Count > 0)
+                selection = SelectedListSelectedItems;
+            else if (OutputListSelectedItems.Count > 0)
+                selection = OutputListSelectedItems;
+            else
+                return;
+
+            foreach (Breed breed in selection)
             {
                 Breed[] children = BreedsRepo.FindChildren(breed).ToArray();
                 int?[] parentGens = FindParentGenerations(breed);
@@ -157,7 +170,9 @@ namespace RustCrossbreed.ViewModels
             foreach (Breed breed in BreedsListSelectedItems)
             {
                 if (SelectedRepo.TryAdd(breed))
-                    ClearGenesOutput();
+                {
+                    CrossbreedSelectedBreeds();
+                }
             }
         }
 
@@ -173,8 +188,8 @@ namespace RustCrossbreed.ViewModels
                     itemRemoved |= true;
                 }
             }
-            if(itemRemoved)
-                ClearGenesOutput();
+            if (itemRemoved)
+                CrossbreedSelectedBreeds();
         }
         public void CrossbreedSelectedBreeds()
         {
