@@ -18,10 +18,10 @@ namespace RustCrossbreed.Views
             InitializeComponent();
 
             var genesRepo = new BreedRepository();
-            genesRepo.TryAdd(BreedFactory.ParseBreed("GYHXWW"));
-            genesRepo.TryAdd(BreedFactory.ParseBreed("GGYYYY"));
-            genesRepo.TryAdd(BreedFactory.ParseBreed("GGGGYY"));
-            genesRepo.TryAdd(BreedFactory.ParseBreed("GGYYHH"));
+            //genesRepo.TryAdd(BreedFactory.ParseBreed("GYHXWW"));
+            //genesRepo.TryAdd(BreedFactory.ParseBreed("GGYYYY"));
+            //genesRepo.TryAdd(BreedFactory.ParseBreed("GGGGYY"));
+            //genesRepo.TryAdd(BreedFactory.ParseBreed("GGYYHH"));
 
             vm = new MainWindowViewModel(new RustCrossbreeder(), genesRepo, new BreedRepository(true), 
                 new BreedRepository(), new HistoryRepository());
@@ -66,10 +66,6 @@ namespace RustCrossbreed.Views
         private void OutputSave_Click(object sender, RoutedEventArgs e)
         {
             vm.SaveOutputBreed();
-        }
-        private void OutputClear_Click(object sender, RoutedEventArgs e)
-        {
-            vm.ClearGenesOutput();
         }
         #endregion 
 
