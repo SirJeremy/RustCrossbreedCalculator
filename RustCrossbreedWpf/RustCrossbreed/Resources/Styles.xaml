@@ -1,6 +1,9 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <!--https://stackoverflow.com/a/58432987/13282621-->
+    <!--additional bug for later fix-->
+    
     <!--https://docs.microsoft.com/en-us/dotnet/framework/wpf/advanced/packaging-fonts-with-applications-->
     <!--so I think the documentation for this is wrong, using "./" doesnt work but both "/" and "../" work-->
     <!--using the following also works "pack://application:,,,/Resources/Fonts/Roboto_Mono/#Roboto Mono"-->
